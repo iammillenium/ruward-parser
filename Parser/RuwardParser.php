@@ -17,7 +17,11 @@ class RuwardParser implements IParser
     $paragraphs = $xpath->query('.//div[@class="redorderleft"]/p', $node);
 
     foreach ($paragraphs as $p) {
-      $result .= $p->nodeValue;
+      if (empty($p->nodeValue)) {
+        continue;
+      }
+      
+      $result .= $p->nodeValue . PHP_EOL;
     }
 
     return $result;
@@ -38,7 +42,11 @@ class RuwardParser implements IParser
     $companyInfo = '';
 
     foreach ($paragraphs as $p) {
-      $companyInfo .= $p->nodeValue;
+      if (empty($p->nodeValue)) {
+        continue;
+      }
+
+      $companyInfo .= $p->nodeValue . PHP_EOL;
     }
 
     return [
